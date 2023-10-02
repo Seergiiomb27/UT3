@@ -14,26 +14,33 @@
 
     $verboAConjugar = $verbos[array_rand($verbos)];
 
-    function conjugarVerbo ($verbo) {
-        $conjugacion = [
-            "yo" => $verbo . "o",
-            "tu" => $verbo . "as",
-            "el" => $verbo . "a",
-            "nosotros" => $verbo . "emos",
-            "vosotros" => $verbo . "eis",
-            "ellos" => $verbo . "en",
-        ];
+    if (substr($verboAConjugar, -2) == "ar" || substr($verboAConjugar, -2) == "er" || substr($verboAConjugar, -2) == "ir") {
+        $verboSinTerminacion = substr($verboAConjugar, 0, -2);
 
-        return $conjugacion;
-    }
+        function conjugarVerbo($verbo)
+        {
+            $conjugacion = [
+                "yo" => $verbo . "o",
+                "tu" => $verbo . "es",
+                "el" => $verbo . "e",
+                "nosotros" => $verbo . "emos",
+                "vosotros" => $verbo . "éis",
+                "ellos" => $verbo . "en",
+            ];
 
-    $presenteIndicativo = conjugarVerbo($verboAConjugar);
+            return $conjugacion;
+        }
 
-    echo "Verbo elegido: $verboAConjugar<br>";
-    echo "Presente del indicativo: <br>";
-    
-    foreach ($presenteIndicativo as $persona => $forma) {
-        echo "$persona: $forma<br>";
+        $presenteIndicativo = conjugarVerbo($verboSinTerminacion);
+
+        echo "Verbo elegido: $verboAConjugar<br>";
+        echo "Presente del indicativo: <br>";
+
+        foreach ($presenteIndicativo as $persona => $forma) {
+            echo "$persona: $forma<br>";
+        }
+    } else {
+        echo "Error: El verbo no tiene una terminación válida (ar, er o ir).";
     }
 
     ?>
